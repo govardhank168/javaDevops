@@ -1,10 +1,12 @@
-FROM openjdk:17-jdk
+# Use the official Nginx image
+FROM nginx:alpine
  
-WORKDIR /app
+# Copy the index.html into the Nginx server's root directory
+COPY index.html /usr/share/nginx/html/index.html
  
-COPY add.java /app
+# Expose port
+EXPOSE 80
  
-RUN javac add.java
+# Start the Nginx server
+CMD ["nginx", "-g", "daemon off;"]
  
-# Run the Java program
-CMD ["java", "add"]
